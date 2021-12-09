@@ -26,7 +26,7 @@ public class UserService {
             return user;
         } else {
             Optional<User> dbUser = userRepository.getUser(user.getId());
-            if (dbUser.isEmpty()) {
+            if (!dbUser.isPresent()) {
                 if (emailExists(user.getEmail()) == false) {
                     return userRepository.save(user);
                 } else {
@@ -41,7 +41,7 @@ public class UserService {
     public User update(User user) {
         if (user.getId() != null) {
             Optional<User> dbUser = userRepository.getUser(user.getId());
-            if (!dbUser.isEmpty()) {
+            if (dbUser.isPresent()) {
                 if (user.getIdentification() != null) {
                     dbUser.get().setIdentification(user.getIdentification());
                 }
@@ -89,7 +89,7 @@ public class UserService {
 
     public User authenticateUser(String email, String password){
         Optional<User> user = userRepository.authenticateUser(email, password);
-        if (user.isEmpty()){
+        if (!user.isPresent()){
             return new User();
         }
         return user.get();

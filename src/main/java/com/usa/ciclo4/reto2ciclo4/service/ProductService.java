@@ -31,7 +31,7 @@ public class ProductService {
     public Product update(Product product){
         if (product.getId()!= null){
             Optional<Product> dbProduct = productRepository.getProduct(product.getId());
-            if (!dbProduct.isEmpty()){
+            if (dbProduct.isPresent()){
                 if (product.getBrand()!= null){
                     dbProduct.get().setBrand(product.getBrand());
                 }
