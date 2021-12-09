@@ -17,8 +17,8 @@ public class ProductRepository {
         return productCrudRepository.findAll();
     }
 
-    public Optional<Product> getProduct(int id){
-        return productCrudRepository.findById(id);
+    public Optional<Product> getProduct(String reference){
+        return productCrudRepository.findByReference(reference);
     }
 
     public Product save(Product product){

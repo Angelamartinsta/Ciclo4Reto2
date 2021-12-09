@@ -12,29 +12,30 @@ import java.util.List;
 @RequestMapping("/api/cosmetics")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ProductController {
+
     @Autowired
     private ProductService productService;
 
     @GetMapping("/all")
-    public List<Product> getAll(){
+    public List<Product> getAll() {
         return productService.getAll();
     }
 
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody Product product){
-        productService.save(product);
+    public Product save(@RequestBody Product product) {
+        return productService.save(product);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Product update(@RequestBody Product product){
+    public Product update(@RequestBody Product product) {
         return productService.update(product);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") int id){
-        return productService.delete(id);
+    public boolean delete(@PathVariable("id") String reference) {
+        return productService.delete(reference);
     }
 }

@@ -17,20 +17,20 @@ public class ProductService {
         return productRepository.getAll();
     }
 
-    public Optional<Product> getProduct(int id){
-        return productRepository.getProduct(id);
+    public Optional<Product> getProduct(String reference){
+        return productRepository.getProduct(reference);
     }
 
     public Product save(Product product){
-        if (product.getId()== null){
+        if (product.getReference()== null){
             return product;
         }
         return productRepository.save(product);
     }
 
     public Product update(Product product){
-        if (product.getId()!= null){
-            Optional<Product> dbProduct = productRepository.getProduct(product.getId());
+        if (product.getReference()!= null){
+            Optional<Product> dbProduct = productRepository.getProduct(product.getReference());
             if (dbProduct.isPresent()){
                 if (product.getBrand()!= null){
                     dbProduct.get().setBrand(product.getBrand());
@@ -65,8 +65,8 @@ public class ProductService {
         }
     }
 
-    public boolean delete(int id){
-        return getProduct(id).map(product -> {
+    public boolean delete(String reference){
+        return getProduct(reference).map(product -> {
             productRepository.delete(product);
             return true;
         }).orElse(false);

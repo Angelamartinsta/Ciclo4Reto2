@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "products")
 public class Product {
     @Id
-    private Integer id;
+    private String reference;
     private String brand;
     private String category;
     private String name;
